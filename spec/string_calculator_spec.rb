@@ -16,5 +16,11 @@ RSpec.describe StringCalculator do
         expect(string_calculator.add("5")).to eq(5)
       end
     end
+
+    context "when input is a string containting positive nums sepearted by ',' " do
+      it "adds all the numbers and return the sum" do
+        expect(string_calculator.add("3,5,6,4")).to eq(18)
+      end
+    end
   end
 end
