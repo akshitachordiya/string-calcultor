@@ -4,18 +4,23 @@ class StringCalculator
     return 0 if input.empty?
 
     return input.to_i if input.length == 1
-    delimiter = /,|\n/
-    if input.start_with?("//")
-      delimiter_line, input = input.split("\n", 2)
-      custom_delimiter = delimiter_line[2..]
-      delimiter = Regexp.escape(custom_delimiter)
-    end
+    delimiter, input = extract_numbers_and_delimeter(input)
     number_array = input.split(/#{delimiter}/).map(&:to_i)
     validate_no_negatives!(number_array)
     return number_array.sum
   end
 
   private
+
+  def extract_numbers_and_delimeter(input)
+    if input.start_with?("//")
+      delimiter_line, numbers_str = input.split("\n", 2)
+      custom_delimiter = Regexp.escape(delimiter_line[2..])
+      [custom_delimiter, numbers_str]
+    else
+      [",|\n", input]
+    end
+  end
 
   def validate_no_negatives!(numbers)
     negatives = numbers.select(&:negative?)
