@@ -3,8 +3,7 @@ class StringCalculator
   def add(str)
     return 0 if str.empty?
 
-    length_of_string = str.length
-    return str.to_i if length_of_string == 1
+    return str.to_i if str.length == 1
     delimiter = /,|\n/
     if str.start_with?("//")
       delimiter_line, str = str.split("\n", 2)
