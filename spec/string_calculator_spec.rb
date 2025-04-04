@@ -34,5 +34,13 @@ RSpec.describe StringCalculator do
         expect(string_calculator.add("//;\n1;2")).to eq(3)
       end
     end
+
+    context "when input string has negative numbers" do
+      it "raises an error with all negative numbers listed" do
+        expect {
+          string_calculator.add("-2,-4,7,-3")
+        }.to raise_error("negative numbers not allowed -2,-4,-3")
+      end
+    end
   end
 end
