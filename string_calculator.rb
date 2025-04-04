@@ -12,10 +12,16 @@ class StringCalculator
       delimiter = Regexp.escape(custom_delimiter)
     end
     number_array = str.split(/#{delimiter}/).map(&:to_i)
-    negatives = number_array.select(&:negative?)
+    validate_no_negatives!(number_array)
+    return number_array.sum
+  end
+
+  private
+
+  def validate_no_negatives!(numbers)
+    negatives = numbers.select(&:negative?)
     unless negatives.empty?
       raise "negative numbers not allowed #{negatives.join(',')}"
     end
-    return number_array.sum
   end
 end
