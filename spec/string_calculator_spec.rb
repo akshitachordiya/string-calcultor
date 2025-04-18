@@ -1,8 +1,12 @@
 require_relative '../string_calculator'
 require 'rspec'
+require 'nokogiri'
+require 'open-uri'
+require 'pry'
+
 
 RSpec.describe StringCalculator do
-  let(:string_calculator) { StringCalculator.new }
+  let!(:string_calculator) { StringCalculator.new }
 
   describe "#add" do
     context "when input is an empty string" do
@@ -32,6 +36,12 @@ RSpec.describe StringCalculator do
     context "support diffent delimeter" do
       it 'removes // and ' do
         expect(string_calculator.add("//;\n1;2")).to eq(3)
+      end
+    end
+
+    context "when custom delimeter is '*" do
+      it "multiplies the numbers in the string" do
+        expect(string_calculator.add("//*\n5*2")).to eq(10)
       end
     end
 

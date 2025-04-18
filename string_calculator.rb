@@ -1,3 +1,8 @@
+# require 'nokogiri'
+# require 'open-uri'
+require 'pry'
+
+
 class StringCalculator
   
   def add(input)
@@ -7,7 +12,8 @@ class StringCalculator
     delimiter, input = extract_numbers_and_delimeter(input)
     number_array = input.split(/#{delimiter}/).map(&:to_i)
     validate_no_negatives!(number_array)
-    return number_array.sum
+    delimeter_parsed = delimiter[1..]
+    delimeter_parsed == "*" ? number_array.reduce(:*) : number_array.sum
   end
 
   private
